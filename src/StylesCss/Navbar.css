@@ -1,0 +1,10 @@
+.nav-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: 7px;
+  margin-top: 20px;
+  padding: 0 32px;
+}

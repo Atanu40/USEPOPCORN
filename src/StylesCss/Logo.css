@@ -1,0 +1,16 @@
+.logo-content{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo-img{
+  font-size: 38px;
+}
+
+.logo-title{
+  font-family: var(--font-family);
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--color-text-white);
+}
