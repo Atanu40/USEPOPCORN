@@ -1,0 +1,23 @@
+.box{
+  position: relative;
+  background-color: var(--color-background-500);
+  border-radius: 10px;
+  overflow-y: auto;
+  margin-top: 35px;
+}
+
+.box-btn-toggle{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  background-color: var(--color-background-900);
+  color: var(--color-text);
+  border: none;
+  aspect-ratio: 1;
+  height: 27px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 700;
+}

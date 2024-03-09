@@ -1,0 +1,14 @@
+.list{
+  overflow: scroll;
+  list-style: none;
+  padding: 0.8rem 0;
+}
+
+.list.list-movies li {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.list.list-movies li:hover {
+  background-color: var(--color-background-100);
+}

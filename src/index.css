@@ -69,6 +69,6 @@ a {
 
 @media screen and (max-width: 1024px){
   .page-width--narrow {
-    padding: 0 0rem;
+    padding: 0 3rem;
   }
 }

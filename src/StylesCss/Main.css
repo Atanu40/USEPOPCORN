@@ -1,0 +1,6 @@
+.main-content-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 75vh;
+}

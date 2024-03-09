@@ -1,9 +1,12 @@
 import React from 'react'
 
-const Main = () => {
+import '../StylesCss/Main.css'
+
+const Main = (props) => {
+  const { children } = props;
   return (
-    <div>
-      
+    <div className='main-content-grid'>
+      {children}
     </div>
   )
 }
