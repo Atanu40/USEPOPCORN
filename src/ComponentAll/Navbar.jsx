@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import '../StylesCss/Navbar.css'
 
 const Navbar = (props) => {
-  const { children } = props
+  const { children,className } = props
+
   return (
-    <div className='nav-content'>
+   <>
+    <div>
       {children}
     </div>
+   </>
   )
 }
 

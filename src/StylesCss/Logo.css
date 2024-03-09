@@ -2,6 +2,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .logo-img{
@@ -13,4 +15,15 @@
   font-size: 25px;
   font-weight: 600;
   color: var(--color-text-white);
+}
+
+
+@media screen and (max-width: 480px){
+  .logo-img{
+    font-size: 28px;
+  }
+
+  .logo-title{
+    font-size: 22px;
+  }
 }

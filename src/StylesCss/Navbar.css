@@ -8,3 +8,78 @@
   margin-top: 20px;
   padding: 0 32px;
 }
+
+.small-device-navbar{
+  display: none;
+}
+
+
+.nav-hide {
+  position: absolute;
+  top: 7px;
+  right: -3000px;
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 300px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3%;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-hide.active{
+  right: 11px;
+  top: 20px;
+  position: fixed;
+}
+
+.nav-hide.active::before{
+  content: "";
+  top: 10%;
+  right: 100%;
+  width: 200%;
+  height: 100vh;
+  display: block;
+  position: absolute;
+  background: #0003;
+}
+
+@media screen and (max-width: 787px){
+  .nav-content{
+    display: none;
+  }
+
+  .small-device-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-primary);
+    border-radius: 7px;
+    margin-top: 20px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hum{
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--color-text-white);
+    margin-top: 7px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .small-device-navbar{
+    padding: 0 27px;
+  }
+
+  .nav-hide.active::before{
+    content: "";
+    top: 9%;
+  }
+}

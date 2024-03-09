@@ -18,3 +18,16 @@
   box-shadow: 0 2.4rem 2.4rem rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
+
+@media screen and (max-width: 787px){
+  .search-bar{
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .search-bar::placeholder{
+    color: var(--color-text);
+    font-size: 16px;
+  }
+}
