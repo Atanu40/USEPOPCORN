@@ -21,3 +21,7 @@
   cursor: pointer;
   font-weight: 700;
 }
+
+.svg-icon{
+  color: var(--color-text);
+}

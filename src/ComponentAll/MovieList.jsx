@@ -5,16 +5,15 @@ import '../StylesCss/MovieList.css'
 
 const MovieList = (props) => {
 
-  const { movieList } = props;
+  const { movieList,selectedMovie } = props;
 
   return (
     <>
-      <ul className='list list.list-movies '>
+      <ul className='list'>
         {
           movieList?.map((movie) => {
-            console.log(movie);
             return (
-              <Movie key={movie.imdbID} eachMovie={movie}/>
+              <Movie key={movie.imdbID} eachMovie={movie} selectedMovie={selectedMovie} />
             )
           })
         }

@@ -14,7 +14,7 @@ const Box = (props) => {
   return (
     <div className='box'>
       <button className='box-btn-toggle' onClick={onToggle}>
-         {click ? "-" : "+"}   
+         {click ? "-":"+"}   
       </button>
       {
         click && children

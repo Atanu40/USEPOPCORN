@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 
 import './App.css'
 import './StylesCss/Navbar.css'
+import './StylesCss/Watched.css'
 
 import Navbar from './ComponentAll/Navbar'
 import Logo from './ComponentAll/Logo'
@@ -12,22 +13,32 @@ import NumResult from './ComponentAll/NumResult'
 import Main from './ComponentAll/Main'
 import Box from './ComponentAll/Box'
 import MovieList from './ComponentAll/MovieList'
+import WatchSummary from './ComponentAll/WatchSummary'
+import WatchedMovieList from './ComponentAll/WatchedMovieList'
+import MovieDetails from './ComponentAll/MovieDetails'
 
 const KEY = "814fb7bf"
 
 function App() {
 
   const [movie, setMovie] = useState([]);
+  const [watch, setWatch] = useState([]);
   const [search, setSearch] = useState('');
   const [nav,setNav] =  useState(false);
   const [error,setError] = useState("");
+  const [selectedMovie,setSelectedMovie] = useState(null);
+
+  console.log(selectedMovie);
+
+  const selectedMovieFunc = (id) => {
+    setSelectedMovie((prev) => prev === id ? null : id);
+  }
 
   useEffect(()=>{
     const getMovie = async () => {
       try{
         console.log(search)
         const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${search}`);
-
 
         if(!res.ok){
           throw new Error("Something went wrong with fetching movies");
@@ -45,7 +56,6 @@ function App() {
         console.log(err);
         setError(err);
       }   
-
     }
     getMovie();
   },[search])
@@ -88,10 +98,16 @@ function App() {
       <div className='page-width page-width--narrow'>
         <Main>
           <Box>
-            <MovieList  movieList={movie}/>
+            <MovieList movieList={movie} selectedMovie={selectedMovieFunc}/>
           </Box>
           <Box>
-            <h1>hello</h1>
+            {
+              selectedMovie ? <MovieDetails selectedMovie={selectedMovie}/> 
+                            : <div className='watch-part'>
+                                <WatchSummary watch={watch}/>
+                                <WatchedMovieList watch={watch}/> 
+                              </div>
+            }
           </Box>
         </Main>
       </div>

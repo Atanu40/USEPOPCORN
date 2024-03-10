@@ -72,3 +72,9 @@ a {
     padding: 0 3rem;
   }
 }
+
+@media screen and (max-width: 480px){
+  .page-width--narrow {
+    padding: 0 2rem;
+  }
+}
