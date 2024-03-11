@@ -1,0 +1,49 @@
+.movie-details-content{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.movie-details-grid{
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.movie-details-poster{
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 140%;
+}
+
+.details-poster-bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-details-right{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.movie-details-right h2{
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.movie-details-right p{
+  font-size: 14px;
+  color: var(--color-text);
+  margin: 0;
+}

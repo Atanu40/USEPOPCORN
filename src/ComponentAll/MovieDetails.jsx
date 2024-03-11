@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import StarComponent from '../ComponentAll/StarComponent'
 import '../StylesCss/MovieDetails.css'
 
 const MovieDetails = (props) => {
@@ -11,7 +12,7 @@ const MovieDetails = (props) => {
   console.log(selectItemDetails);
 
   const { Title, Year,Rated,Released,Runtime,Actors,Genre,
-    Writer,Poster,Type,imdbID,Plot } = selectItemDetails;
+    Writer,Poster,Type,imdbID,Plot,imdbRating } = selectItemDetails;
 
   useEffect(() => {
 
@@ -41,8 +42,21 @@ const MovieDetails = (props) => {
     }, [selectedMovie])
 
   return (
-    <div>
-      <h2>{Title}</h2>
+    <div className='movie-details-content'>
+      <div className='movie-details-grid'>
+        <div className='movie-details-poster'>
+          <img className='details-poster-bg' src={Poster} alt={Title} />
+        </div>
+        <div className='movie-details-right'>
+          <h2>{Title}</h2>
+          <p>{Released} &bull; {Runtime}</p>
+          <p>{Genre}</p>
+          <p><span style={{marginRight:"3px"}}>⭐️</span>{imdbRating} IMDb rating</p>
+        </div>
+      </div>
+      <div>
+        <StarComponent />
+      </div>
     </div>
   )
 }
