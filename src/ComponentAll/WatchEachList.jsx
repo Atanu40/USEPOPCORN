@@ -6,12 +6,20 @@ const WatchEachList = (props) => {
 
   const { eachWatch } = props;
  
-  const average = (arr) =>
-  arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+  console.log(eachWatch);
 
-  const avgImdbRating = average(eachWatch.map((movie) => movie.imdbRating));
-  const avgUserRating = average(eachWatch.map((movie) => movie.userRating));
-  const avgRuntime = average(eachWatch.map((movie) => movie.runtime));
+
+  function average(arr) {
+    if (arr.length === 0) return 0; // Avoid division by zero
+    const sum = arr.reduce((acc, cur) => acc + cur, 0);
+    return sum / arr.length;
+  }
+  
+  console.log(eachWatch.title); 
+  const avgImdbRating = average(eachWatch.map(movie => parseFloat(movie.imdbRating || 0)));
+  const avgUserRating = average(eachWatch.map((movie) => parseFloat(movie.userRating)));
+  const avgRuntime = average(eachWatch.map((movie) => parseFloat(movie.runtime)));
+
 
   return (
     <>

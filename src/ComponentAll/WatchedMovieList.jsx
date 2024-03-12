@@ -5,6 +5,7 @@ import "../StylesCss/WatchedMovieList.css"
 
 const WatchedMovieList = (props) => {
   const {watch} = props;
+  console.log(watch);
   return (
     <>
      <ul className='watch-movie-list'>

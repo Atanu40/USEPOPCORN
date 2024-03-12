@@ -34,6 +34,20 @@ function App() {
     setSelectedMovie((prev) => prev === id ? null : id);
   }
 
+  const CloseDetails=()=>{
+    setSelectedMovie(null);
+  }
+
+  const hamburgerChange = () => {
+    setNav((prev) => !prev)
+  }
+
+  const updateWatch = (movie) => {
+    setWatch((prev) => [...prev,movie]);
+  }
+
+  console.log(watch);
+
   useEffect(()=>{
     const getMovie = async () => {
       try{
@@ -60,9 +74,6 @@ function App() {
     getMovie();
   },[search])
 
-  const hamburgerChange = () => {
-    setNav((prev) => !prev)
-  }
 
   return (
     <>
@@ -102,7 +113,7 @@ function App() {
           </Box>
           <Box>
             {
-              selectedMovie ? <MovieDetails selectedMovie={selectedMovie}/> 
+              selectedMovie ? <MovieDetails selectedMovie={selectedMovie}         CloseDetails={CloseDetails} updateWatch={updateWatch}/> 
                             : <div className='watch-part'>
                                 <WatchSummary watch={watch}/>
                                 <WatchedMovieList watch={watch}/> 
