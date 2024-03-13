@@ -16,19 +16,23 @@ const WatchEachList = (props) => {
   }
   
   console.log(eachWatch.title); 
-  const avgImdbRating = average(eachWatch.map(movie => parseFloat(movie.imdbRating || 0)));
-  const avgUserRating = average(eachWatch.map((movie) => parseFloat(movie.userRating)));
-  const avgRuntime = average(eachWatch.map((movie) => parseFloat(movie.runtime)));
+  // const avgImdbRating = average(eachWatch.map(movie => parseFloat(movie.imdbRating || 0)));
+  // const avgUserRating = average(eachWatch.map((movie) => parseFloat(movie.userRating)));
+  // const avgRuntime = average(eachWatch.map((movie) => parseFloat(movie.runtime)));
+
+  const avgImdbRating = average([parseFloat(eachWatch.imdbRating || 0)]);
+  const avgUserRating = average([parseFloat(eachWatch.userRating)]);
+  const avgRuntime = average([parseFloat(eachWatch.runtime)]);
 
 
   return (
     <>
       <li className='watched-each-container'>
          <div className='watch-each-img-container'>
-            <img src={Poster} alt={Title} className='watch-each-img'/>
+            <img src={eachWatch.poster} alt={eachWatch.title} className='watch-each-img'/>
          </div>
          <div className='watched-each-container-details'>
-            <h3 className='watch-each-title'>{Title}</h3>
+            <h3 className='watch-each-title'>{eachWatch.title}</h3>
              <div className='watch-each-subtile'>
               <p>
                 <span>⭐️</span>

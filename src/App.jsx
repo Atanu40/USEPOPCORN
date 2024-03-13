@@ -16,6 +16,7 @@ import MovieList from './ComponentAll/MovieList'
 import WatchSummary from './ComponentAll/WatchSummary'
 import WatchedMovieList from './ComponentAll/WatchedMovieList'
 import MovieDetails from './ComponentAll/MovieDetails'
+import Loader from './ComponentAll/Loader'
 
 const KEY = "814fb7bf"
 
@@ -26,9 +27,14 @@ function App() {
   const [search, setSearch] = useState('');
   const [nav,setNav] =  useState(false);
   const [error,setError] = useState("");
+  const [errorState,setErrorState] = useState(false);
   const [selectedMovie,setSelectedMovie] = useState(null);
+  const [loading,setLoading] = useState(false);
+
+  const isWatched = watch.map((movie) => movie.imdbID).includes(selectedMovie);
 
   console.log(selectedMovie);
+  console.log(isWatched);
 
   const selectedMovieFunc = (id) => {
     setSelectedMovie((prev) => prev === id ? null : id);
@@ -51,7 +57,8 @@ function App() {
   useEffect(()=>{
     const getMovie = async () => {
       try{
-        console.log(search)
+        setLoading(true);
+        setErrorState(false)
         const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${search}`);
 
         if(!res.ok){
@@ -68,9 +75,21 @@ function App() {
       }
       catch(err){
         console.log(err);
+        setErrorState(true)
         setError(err);
-      }   
+      }  
+      finally{
+        setLoading(false);
+        setErrorState(false)
+      } 
     }
+
+    if(search < 3){
+      setMovie([])
+      setError("");
+      return;
+    }
+
     getMovie();
   },[search])
 
@@ -109,6 +128,8 @@ function App() {
       <div className='page-width page-width--narrow'>
         <Main>
           <Box>
+            {loading && <Loader />}
+            {errorState && <p>{error}</p>}
             <MovieList movieList={movie} selectedMovie={selectedMovieFunc}/>
           </Box>
           <Box>

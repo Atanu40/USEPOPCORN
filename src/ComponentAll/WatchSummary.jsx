@@ -11,8 +11,7 @@ const WatchSummary = (props) => {
 
   const avgImdbRating = average(watch.map((movie) => movie.imdbRating));
   const avgUserRating = average(watch.map((movie) => movie.userRating));
-  const avgRuntime = average(watch.map((movie) => movie.runtime));
-
+  const avgRuntime = average(watch.map((movie) => parseFloat(movie.runtime)));
 
   return (
     <div className='summary-movie'>

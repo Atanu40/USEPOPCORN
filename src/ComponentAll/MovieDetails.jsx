@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import StarComponent from '../ComponentAll/StarComponent'
+import Loader from '../ComponentAll/Loader'
 import '../StylesCss/MovieDetails.css'
 
 const MovieDetails = (props) => {
@@ -11,6 +12,7 @@ console.log(selectedMovie);
 
 const [selectItemDetails,setSelectItemDetails] = useState({});
 const [FinalRating,setFinalRating] = useState(0);
+const [loading,setLoading] = useState(false);
 
 
 const { Title, Year,Rated,Released,Runtime,Actors,Genre,
@@ -36,6 +38,7 @@ const list ={
 
 const onAdd = () => {
   updateWatch(list);
+  CloseDetails();
 }
 
 const updateRatting = (number) => {
@@ -48,6 +51,7 @@ console.log(FinalRating);
 useEffect(() => {
   const getMovie = async () => {
     try{
+      setLoading(true); 
       const res = await fetch(`http://www.omdbapi.com/?apikey=814fb7bf&i=${selectedMovie}`);
 
       if(!res.ok){
@@ -66,12 +70,17 @@ useEffect(() => {
     catch(err){
       console.log(err);
     }
+    finally{
+      setLoading(false);
+    }
   }
   getMovie();
   
 }, [selectedMovie])
 
   return (
+  <>
+    {loading ? <Loader /> : 
     <div className='movie-details-content'>
       <button className='back-btn' onClick={CloseDetails}>&larr;</button>
       <div className='movie-details-grid'>
@@ -91,7 +100,7 @@ useEffect(() => {
           {
             FinalRating > 0 && <button className='rate-add-btn' onClick={onAdd}>+ Add to list</button>
           }
-           
+            
         </div>
         <div className='movie-details-below'>
           <p>
@@ -102,6 +111,9 @@ useEffect(() => {
         </div>
       </div>
     </div>
+    }
+  </>
+   
   )
 }
 

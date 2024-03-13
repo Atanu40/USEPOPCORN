@@ -1,0 +1,26 @@
+.loading {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 5px solid #ddd;
+  border-top-color: orange;
+  animation: loading 1s linear infinite;
+}
+
+.loading-state{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30vh;
+  /* position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%; */
+}
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
