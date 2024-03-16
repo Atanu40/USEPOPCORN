@@ -4,7 +4,7 @@ import '../StylesCss/WatchEachedList.css'
 
 const WatchEachList = (props) => {
 
-  const { eachWatch } = props;
+  const { eachWatch,onDeleteWatched } = props;
  
   console.log(eachWatch);
 
@@ -16,10 +16,6 @@ const WatchEachList = (props) => {
   }
   
   console.log(eachWatch.title); 
-  // const avgImdbRating = average(eachWatch.map(movie => parseFloat(movie.imdbRating || 0)));
-  // const avgUserRating = average(eachWatch.map((movie) => parseFloat(movie.userRating)));
-  // const avgRuntime = average(eachWatch.map((movie) => parseFloat(movie.runtime)));
-
   const avgImdbRating = average([parseFloat(eachWatch.imdbRating || 0)]);
   const avgUserRating = average([parseFloat(eachWatch.userRating)]);
   const avgRuntime = average([parseFloat(eachWatch.runtime)]);
@@ -48,6 +44,14 @@ const WatchEachList = (props) => {
                   <span>🎬</span>
                   <span>{avgRuntime.toFixed(2)} min</span>
               </p>
+
+              <button
+                className="btn-delete"
+                onClick={() => onDeleteWatched(eachWatch.imdbID)}
+              >
+                X
+              </button>
+
              </div>
          </div>
       </li>

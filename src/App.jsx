@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 
 import './App.css'
 import './StylesCss/Navbar.css'
@@ -31,11 +29,6 @@ function App() {
   const [selectedMovie,setSelectedMovie] = useState(null);
   const [loading,setLoading] = useState(false);
 
-  const isWatched = watch.map((movie) => movie.imdbID).includes(selectedMovie);
-
-  console.log(selectedMovie);
-  console.log(isWatched);
-
   const selectedMovieFunc = (id) => {
     setSelectedMovie((prev) => prev === id ? null : id);
   }
@@ -52,14 +45,20 @@ function App() {
     setWatch((prev) => [...prev,movie]);
   }
 
-  console.log(watch);
+  const onDeleteWatched = (id) => {
+    setWatch((prev) => prev.filter(movie => movie.imdbID !== id));
+  }
 
+  /*Search from data api using useEffect hook */
   useEffect(()=>{
+    const controller = new AbortController(); // Create a new AbortController instance of AbortController class to abort fetch request when component unmounts or search changes before the fetch request is completed or when the fetch request is taking too long to complete //
     const getMovie = async () => {
       try{
         setLoading(true);
         setErrorState(false)
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${search}`);
+        const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${search}`,
+        { signal: controller.signal }
+        );
 
         if(!res.ok){
           throw new Error("Something went wrong with fetching movies");
@@ -74,13 +73,13 @@ function App() {
         setMovie(data.Search);
       }
       catch(err){
-        console.log(err);
-        setErrorState(true)
-        setError(err);
+        if (err.name !== "AbortError") {
+          console.log(err.message);
+          setError(err.message);
+        }
       }  
       finally{
         setLoading(false);
-        setErrorState(false)
       } 
     }
 
@@ -91,7 +90,25 @@ function App() {
     }
 
     getMovie();
+
+    return function () {
+      controller.abort();
+    };
   },[search])
+
+   /*Direct dom manupulate using useEffect hook */
+  useEffect(() => {
+    if (nav) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
+
+    // Cleanup function to reset body overflow when component unmounts or nav changes
+    return () => {
+      document.body.style.overflowY = 'auto';
+    };
+  }, [nav]);
 
 
   return (
@@ -129,15 +146,15 @@ function App() {
         <Main>
           <Box>
             {loading && <Loader />}
-            {errorState && <p>{error}</p>}
-            <MovieList movieList={movie} selectedMovie={selectedMovieFunc}/>
+            {errorState ? <p className='error-message'>{error}</p> :
+            <MovieList movieList={movie} selectedMovie={selectedMovieFunc}/>}
           </Box>
           <Box>
             {
-              selectedMovie ? <MovieDetails selectedMovie={selectedMovie}         CloseDetails={CloseDetails} updateWatch={updateWatch}/> 
+              selectedMovie ? <MovieDetails selectedMovie={selectedMovie}         CloseDetails={CloseDetails} updateWatch={updateWatch} watch={watch} movie={movie}/> 
                             : <div className='watch-part'>
                                 <WatchSummary watch={watch}/>
-                                <WatchedMovieList watch={watch}/> 
+                                <WatchedMovieList watch={watch} onDeleteWatched={onDeleteWatched}/> 
                               </div>
             }
           </Box>

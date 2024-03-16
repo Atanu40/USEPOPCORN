@@ -4,7 +4,7 @@ import WatchEachList from '../ComponentAll/WatchEachList'
 import "../StylesCss/WatchedMovieList.css"
 
 const WatchedMovieList = (props) => {
-  const {watch} = props;
+  const {watch,onDeleteWatched} = props;
   console.log(watch);
   return (
     <>
@@ -12,7 +12,7 @@ const WatchedMovieList = (props) => {
         {
           watch?.map((movie) => {
             return (
-              <WatchEachList key={movie.imdbID} eachWatch={movie}/>
+              <WatchEachList key={movie.imdbID} eachWatch={movie} onDeleteWatched={onDeleteWatched}/>
             )
           })
         }

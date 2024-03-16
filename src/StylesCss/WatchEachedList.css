@@ -45,4 +45,23 @@
   display: flex;
   gap: 7px;
   margin-top: 2px;
+  align-items: center;
+}
+
+.watch-each-subtile p{
+  color: var(--color-text);
+}
+
+.btn-delete{
+  aspect-ratio: 1;
+  background-color: var(--color-red);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-background-900);
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 700;
+  height: 1.2rem;
+  transition: all .3s;
+  padding: 0;
 }

@@ -104,3 +104,9 @@
   transition: all 0.3s ease-in-out;
   font-family: var(--font-family);
 }
+
+.watched-text{
+  font-size: 16px;
+  color: var(--color-text);
+  margin: 0;
+}
