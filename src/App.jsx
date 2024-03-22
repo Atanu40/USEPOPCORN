@@ -15,19 +15,29 @@ import WatchSummary from './ComponentAll/WatchSummary'
 import WatchedMovieList from './ComponentAll/WatchedMovieList'
 import MovieDetails from './ComponentAll/MovieDetails'
 import Loader from './ComponentAll/Loader'
+import { useLocalStorage } from './CustomHooks/useLocalStorage'
 
 const KEY = "814fb7bf"
 
 function App() {
 
   const [movie, setMovie] = useState([]);
-  const [watch, setWatch] = useState([]);
+  // const [watch, setWatch] = useState([]);
   const [search, setSearch] = useState('');
   const [nav,setNav] =  useState(false);
   const [error,setError] = useState("");
   const [errorState,setErrorState] = useState(false);
   const [selectedMovie,setSelectedMovie] = useState(null);
   const [loading,setLoading] = useState(false);
+
+  // const [watch, setWatch] = useState(() => {  
+  //   const saved = localStorage.getItem("watched");
+  //   const initialValue = JSON.parse(saved);
+  //   return initialValue ;
+  // });
+ 
+  /* Custom Hook for LocalStorage */
+  const [watch, setWatch] = useLocalStorage("watched",[]);
 
   const selectedMovieFunc = (id) => {
     setSelectedMovie((prev) => prev === id ? null : id);
@@ -109,6 +119,11 @@ function App() {
       document.body.style.overflowY = 'auto';
     };
   }, [nav]);
+
+  /* LocalStorage set data */
+  // useEffect(() => {
+  //  localStorage.setItem("watched",JSON.stringify(watch));
+  // },[watch])
 
 
   return (
